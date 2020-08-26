@@ -10,16 +10,20 @@ class MovieForm extends Form {
       title: "",
       genreId: "",
       numberInStock: "",
-      dailyRentalRate: "",
+      dailyRentalRate: ""
     },
     genres: [],
-    errors: {},
+    errors: {}
   };
 
   schema = {
     _id: Joi.string(),
-    title: Joi.string().required().label("Title"),
-    genreId: Joi.string().required().label("Genre"),
+    title: Joi.string()
+      .required()
+      .label("Title"),
+    genreId: Joi.string()
+      .required()
+      .label("Genre"),
     numberInStock: Joi.number()
       .required()
       .min(0)
@@ -29,10 +33,10 @@ class MovieForm extends Form {
       .required()
       .min(0)
       .max(10)
-      .label("Daily Rental Rate"),
+      .label("Daily Rental Rate")
   };
 
-  async populateGenre() {
+  async populateGenres() {
     const { data: genres } = await getGenres();
     this.setState({ genres });
   }
@@ -44,14 +48,14 @@ class MovieForm extends Form {
 
       const { data: movie } = await getMovie(movieId);
       this.setState({ data: this.mapToViewModel(movie) });
-    } catch (exception) {
-      if (exception.response && exception.response.status === 404)
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
         this.props.history.replace("/not-found");
     }
   }
 
   async componentDidMount() {
-    await this.populateGenre();
+    await this.populateGenres();
     await this.populateMovie();
   }
 
@@ -61,7 +65,7 @@ class MovieForm extends Form {
       title: movie.title,
       genreId: movie.genre._id,
       numberInStock: movie.numberInStock,
-      dailyRentalRate: movie.dailyRentalRate,
+      dailyRentalRate: movie.dailyRentalRate
     };
   }
 
@@ -74,8 +78,8 @@ class MovieForm extends Form {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className="container m-8">
-          <h1>Movie Form</h1>
+        <h1>Movie Form</h1>
+        <form onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Title")}
           {this.renderSelect("genreId", "Genre", this.state.genres)}
           {this.renderInput("numberInStock", "Number in Stock", "number")}

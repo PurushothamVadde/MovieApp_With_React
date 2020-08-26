@@ -1,11 +1,11 @@
 import http from "./httpService";
 
-const apiEndPoint = "/users";
+const apiEndpoint = "/users";
 
 export function register(user) {
-  return http.post(apiEndPoint, {
+  return http.post(apiEndpoint, {
     email: user.username,
     password: user.password,
-    name: user.customerName,
+    name: user.name,
   });
 }
