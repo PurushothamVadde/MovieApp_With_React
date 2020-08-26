@@ -10,10 +10,10 @@ import MovieForm from "./components/movieForm";
 import LoginForm from "./components/loginForm";
 import Logout from "./components/logout";
 import auth from ".//services/authService";
-import Registrtaion from "./components/registrationForm";
 import ProtectedRoute from "./components/common/protectedRoute";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import RegisterForm from "./components/registerForm";
 
 class App extends Component {
   state = {};
@@ -31,7 +31,7 @@ class App extends Component {
         <NavBar user={user} />
         <main className="container">
           <Switch>
-            <Route path="/registrationForm" component={Registrtaion}></Route>
+            <Route path="/registerForm" component={RegisterForm}></Route>
             <Route path="/loginForm" component={LoginForm}></Route>
             <Route path="/logout" component={Logout}></Route>
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
